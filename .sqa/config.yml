@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    code-repo.d4science.org/D-Net/dnet-openaire-exporter:
+      branch: master
+      repo: https://code-repo.d4science.org/D-Net/dnet-openaire-exporter
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-saffron-sloth.sh
+        container: qc.acc_chewy-peach-boar
+  QC.Doc:
+    repos:
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gamy-linen-russel.sh
+        container: qc.doc_dorky-green-monkey
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-jade-armadillo.sh
+        container: qc.doc_slaphappy-silver-gibbon
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-ecru-neanderthal.sh
+        container: qc.doc_wiggy-alizarin-shrew
+  QC.Lic:
+    repos:
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-violet-gopher.sh
+        container: qc.lic_freaky-emerald-bracke
+  QC.Sty:
+    repos:
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-chartreuse-ostrich.sh
+        container: qc.sty_grumpy-cardinal-kingfisher
+  QC.Ver:
+    repos:
+      code-repo.d4science.org/D-Net/dnet-openaire-exporter get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-salmon-chin.sh
+        container: qc.ver_sunny-vermilion-camel
+timeout: 1800
